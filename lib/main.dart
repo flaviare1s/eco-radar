@@ -49,30 +49,52 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class News {
+  final String title;
+  final String content;
+
+  News({required this.title, required this.content});
+}
+
 class NewsListPage extends StatelessWidget {
-  final List<String> news = [
-    'Plantas urbanas ajudam a reduzir a poluição do ar',
-    'Iniciativas de reciclagem crescem nas cidades brasileiras',
-    'Comunidades adotam energia solar como alternativa sustentável',
-    'Estudo mostra impacto do desmatamento na biodiversidade',
-    'A importância da preservação de áreas verdes em centros urbanos',
+  final List<News> news = [
+    News(
+      title: 'Plantas urbanas ajudam a reduzir a poluição do ar',
+      content: 'Estudos mostram que o plantio de árvores em áreas urbanas ajuda a reduzir poluentes e melhora a qualidade do ar, beneficiando a saúde da população.'
+    ),
+    News(
+      title: 'Iniciativas de reciclagem crescem nas cidades brasileiras',
+      content: 'Diversas cidades brasileiras têm implementado programas de reciclagem que incentivam a população a separar resíduos, reduzindo a quantidade de lixo em aterros sanitários.'
+    ),
+    News(
+      title: 'Comunidades adotam energia solar como alternativa sustentável',
+      content: 'Residências e comunidades estão investindo em painéis solares, reduzindo o consumo de energia elétrica e promovendo sustentabilidade ambiental.'
+    ),
+    News(
+      title: 'Estudo mostra impacto do desmatamento na biodiversidade',
+      content: 'Pesquisadores alertam que o desmatamento acelerado compromete espécies animais e vegetais, afetando o equilíbrio ecológico.'
+    ),
+    News(
+      title: 'A importância da preservação de áreas verdes em centros urbanos',
+      content: 'Parques e áreas verdes em cidades são essenciais para o bem-estar dos moradores, ajudando na redução do calor urbano e na promoção da biodiversidade local.'
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ecoradar')),
+      appBar: AppBar(title: Text('EcoRadar')),
       body: ListView.builder(
         itemCount: news.length,
         itemBuilder: (context, index) {
           return ListTile(
             leading: Icon(Icons.eco, color: Colors.green),
-            title: Text(news[index]),
+            title: Text(news[index].title),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => NewsDetailPage(newsTitle: news[index]),
+                  builder: (context) => NewsDetailPage(news: news[index]),
                 ),
               );
             },
@@ -83,10 +105,10 @@ class NewsListPage extends StatelessWidget {
   }
 }
 
-class NewsDetailPage extends StatelessWidget {
-  final String newsTitle;
+ class NewsDetailPage extends StatelessWidget {
+  final News news;
 
-  NewsDetailPage({required this.newsTitle});
+  NewsDetailPage({required this.news});
 
   @override
   Widget build(BuildContext context) {
@@ -98,14 +120,11 @@ class NewsDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              newsTitle,
+              news.title,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            Text(
-              'Aqui você pode incluir o conteúdo completo da notícia. Por enquanto, estamos exibindo apenas o título.',
-              style: TextStyle(fontSize: 16),
-            ),
+            Text(news.content, style: TextStyle(fontSize: 16)),
           ],
         ),
       ),
