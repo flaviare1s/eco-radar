@@ -90,6 +90,7 @@ class NewsListPage extends StatelessWidget {
           return ListTile(
             leading: Icon(Icons.eco, color: Colors.green),
             title: Text(news[index].title),
+            trailing: Icon(Icons.arrow_forward, color: Colors.green),
             onTap: () {
               Navigator.push(
                 context,
