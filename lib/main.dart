@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(EcoRadarApp());
@@ -128,6 +129,25 @@ class NewsListPage extends StatelessWidget {
             Text(news.content, style: TextStyle(fontSize: 16)),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MapPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Mapa')),
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: LatLng(
+            -23.55052,
+            -46.633308,
+          ), // Localização inicial (São Paulo, Brasil)
+          zoom: 12,
+        ),
+        mapType: MapType.normal,
       ),
     );
   }
